@@ -33,6 +33,8 @@ public:
 	void OP_00EE(); //RET ; return from a subroutine
 	void OP_1nnn(); //JP addr ; jump to location nnn
 	void OP_2nnn(); //CALL addr ; call the subroutine at nnn
+	void OP_3xkk(); // SE Vx , byte ; skip next instuction if Vx = kk
+	void OP_4xkk(); // SNE Vx, byte ; skip next     bvn
 	 
 
 };
