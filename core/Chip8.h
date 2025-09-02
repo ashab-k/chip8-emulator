@@ -1,10 +1,14 @@
 
 #ifndef  CHIP8_H
 #define CHIP8_H
+#define VIDEO_WIDTH 64
+#define VIDEO_HEIGHT 32
 
 #include <iostream>
 #include <chrono>
 #include <random>
+
+
 class Chip8
 {
 public:
