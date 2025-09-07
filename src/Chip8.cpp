@@ -408,3 +408,18 @@ void Chip8::OP_Fx65(){
 		registers[i] = memory[index + i];
 	}
 }
+
+void Chip8::Cycle(){
+    opcode = (memory[pc] << 8u | memory[pc + 1]);
+
+    pc += 2;
+    ((*this).*(table[(opcode & 0xF000u) >> 12u]))();
+
+    if (delayTimer > 0 ){
+        --delayTimer;
+    }
+
+    if (soundTimer > 0 ){
+        --soundTimer;
+    }
+}

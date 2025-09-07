@@ -46,8 +46,7 @@ public:
 		table[0xE] = &Chip8::TableE;
 		table[0xF] = &Chip8::TableF;
 
-		for (size_t i = 0; i <= 0xE; i++)
-		{
+		for (size_t i = 0; i <= 0xE; i++){
 			table0[i] = &Chip8::OP_NULL;
 			table8[i] = &Chip8::OP_NULL;
 			tableE[i] = &Chip8::OP_NULL;
@@ -69,8 +68,7 @@ public:
 		tableE[0x1] = &Chip8::OP_ExA1;
 		tableE[0xE] = &Chip8::OP_Ex9E;
 
-		for (size_t i = 0; i <= 0x65; i++)
-		{
+		for (size_t i = 0; i <= 0x65; i++){
 			tableF[i] = &Chip8::OP_NULL;
 		}
 
@@ -85,23 +83,19 @@ public:
 		tableF[0x65] = &Chip8::OP_Fx65;
 	}
 	
-	void Table0()
-	{
+	void Table0(){
 		((*this).*(table0[opcode & 0x000Fu]))();
 	}
 
-	void Table8()
-	{
+	void Table8(){
 		((*this).*(table8[opcode & 0x000Fu]))();
 	}
 
-	void TableE()
-	{
+	void TableE(){
 		((*this).*(tableE[opcode & 0x000Fu]))();
 	}
 
-	void TableF()
-	{
+	void TableF(){
 		((*this).*(tableF[opcode & 0x00FFu]))();
 	}
 
@@ -113,7 +107,7 @@ public:
 	Chip8Func table0[0xE + 1];
 	Chip8Func table8[0xE + 1];
 	Chip8Func tableE[0xE + 1];
-	Chip8Func tableF[0x65 + 1];
+	Chip8Func tableF[0x65 + 1]; 
 
     
     void LoadROM(char const* filename);
@@ -151,6 +145,8 @@ public:
 	void OP_Fx33(); // LD B, Vx ; store BCD representation of Vx in memory locations I, I+1, and I+2
 	void OP_Fx55(); // LD [I], Vx ; store registers V0 through Vx in memory starting at location I
 	void OP_Fx65(); // LD Vx, [I] ; read registers V0 through Vx from memory starting at location I
+
+	void Cycle();
 
 };
 
