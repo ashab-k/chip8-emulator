@@ -1,0 +1,25 @@
+# Compiled object files
+*.o
+*.obj
+
+# Executable files
+chip8_sdl2
+chip8_text
+test_chip8
+test_simple
+test_sdl3
+
+# IDE files
+.vscode/
+*.code-workspace
+
+# macOS
+.DS_Store
+
+# Build directories
+build/
+bin/
+
+# Temporary files
+*.tmp
+*.temp

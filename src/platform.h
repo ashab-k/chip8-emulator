@@ -1,6 +1,6 @@
 #ifndef  PLATFORM_H
 #define PLATFORM_H
-#include <SDL3/SDL.h>
+#include <SDL.h>
 #include <cstdint>
 
 class Platform
@@ -18,13 +18,13 @@ public:
             return;
         }
 
-        window = SDL_CreateWindow(title, windowWidth, windowHeight, SDL_WINDOW_RESIZABLE | SDL_WINDOW_HIGH_PIXEL_DENSITY);
+        window = SDL_CreateWindow(title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, windowWidth, windowHeight, SDL_WINDOW_RESIZABLE);
         if (!window) {
             SDL_Log("SDL_CreateWindow Error: %s", SDL_GetError());
             return;
         }
 
-        renderer = SDL_CreateRenderer(window, nullptr);
+        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
         if (!renderer) {
             SDL_Log("SDL_CreateRenderer Error: %s", SDL_GetError());
             return;
@@ -55,7 +55,7 @@ public:
     {
         SDL_UpdateTexture(texture, nullptr, buffer, pitch);
         SDL_RenderClear(renderer);
-        SDL_RenderTexture(renderer, texture, nullptr, nullptr);
+        SDL_RenderCopy(renderer, texture, nullptr, nullptr);
         SDL_RenderPresent(renderer);
     }
 
@@ -66,16 +66,16 @@ public:
 
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
-            case SDL_EVENT_QUIT:
+            case SDL_QUIT:
                 quit = true;
                 break;
 
-            case SDL_EVENT_KEY_DOWN:
-                HandleKey(event.key.key, keys, 1, quit);
+            case SDL_KEYDOWN:
+                HandleKey(event.key.keysym.sym, keys, 1, quit);
                 break;
 
-            case SDL_EVENT_KEY_UP:
-                HandleKey(event.key.key, keys, 0, quit);
+            case SDL_KEYUP:
+                HandleKey(event.key.keysym.sym, keys, 0, quit);
                 break;
             }
         }
@@ -88,22 +88,22 @@ private:
     {
         switch (key) {
         case SDLK_ESCAPE: quit = true; break;
-        case SDLK_X: keys[0] = value; break;
+        case SDLK_x: keys[0] = value; break;
         case SDLK_1: keys[1] = value; break;
         case SDLK_2: keys[2] = value; break;
         case SDLK_3: keys[3] = value; break;
-        case SDLK_Q: keys[4] = value; break;
-        case SDLK_W: keys[5] = value; break;
-        case SDLK_E: keys[6] = value; break;
-        case SDLK_A: keys[7] = value; break;
-        case SDLK_S: keys[8] = value; break;
-        case SDLK_D: keys[9] = value; break;
-        case SDLK_Z: keys[0xA] = value; break;
-        case SDLK_C: keys[0xB] = value; break;
+        case SDLK_q: keys[4] = value; break;
+        case SDLK_w: keys[5] = value; break;
+        case SDLK_e: keys[6] = value; break;
+        case SDLK_a: keys[7] = value; break;
+        case SDLK_s: keys[8] = value; break;
+        case SDLK_d: keys[9] = value; break;
+        case SDLK_z: keys[0xA] = value; break;
+        case SDLK_c: keys[0xB] = value; break;
         case SDLK_4: keys[0xC] = value; break;
-        case SDLK_R: keys[0xD] = value; break;
-        case SDLK_F: keys[0xE] = value; break;
-        case SDLK_V: keys[0xF] = value; break;
+        case SDLK_r: keys[0xD] = value; break;
+        case SDLK_f: keys[0xE] = value; break;
+        case SDLK_v: keys[0xF] = value; break;
         }
     }
 
