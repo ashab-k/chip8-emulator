@@ -23,3 +23,5 @@ bin/
 # Temporary files
 *.tmp
 *.temp
+
+*.ch8
