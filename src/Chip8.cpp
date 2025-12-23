@@ -470,17 +470,14 @@ Chip8::Chip8() : randGen(std::chrono::system_clock::now().time_since_epoch().cou
 	tableF[0x55] = &Chip8::OP_Fx55;
 	tableF[0x65] = &Chip8::OP_Fx65;
 
-	// Initialize emulator state
 	pc = START_ADDRESS;
 	randDist = std::uniform_int_distribution<uint8_t>(0, 255U);
 
-	// Load fontset into memory
 	for (unsigned int i = 0; i < FONTSET_SIZE; ++i){
 		memory[FONTSET_START_ADDRESS + i] = fontset[i];
 	}
 }
 
-// Table dispatch functions
 void Chip8::Table0(){
 	((*this).*(table0[opcode & 0x000Fu]))();
 }

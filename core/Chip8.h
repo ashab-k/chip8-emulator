@@ -12,7 +12,6 @@
 class Chip8
 {
 public:
-	// Member variables
 	uint8_t registers[16];
 	uint8_t memory[4096];
 	uint16_t index;
@@ -28,15 +27,12 @@ public:
 	std::default_random_engine randGen;
 	std::uniform_int_distribution<uint8_t> randDist;
 
-	// Constants
 	static const unsigned int START_ADDRESS = 0x200;
 	static const unsigned int FONTSET_SIZE = 80;
 	static const unsigned int FONTSET_START_ADDRESS = 0x50;
 
-	// Fontset data
 	static uint8_t fontset[FONTSET_SIZE];
 
-	// Function pointer type for instruction handlers
 	typedef void (Chip8::*Chip8Func)();
 
 	// Function pointer tables for instruction dispatch
