@@ -37,7 +37,7 @@ sudo dnf install SDL2-devel
 **Windows:**
 Download SDL2 development libraries from [libsdl.org](https://www.libsdl.org/download-2.0.php)
 
-### Building with Makefile (Recommended)
+### Building with Makefile
 
 The project includes a Makefile that automatically detects your system and SDL2 installation. Simply run:
 
@@ -47,7 +47,7 @@ make
 
 This will:
 
-- Detect your operating system (macOS, Linux, Windows)
+- Detect your operating system
 - Automatically find SDL2 using `pkg-config` or platform-specific paths
 - Compile all source files
 - Link everything into the `chip8_sdl2` executable
@@ -132,18 +132,3 @@ This runs the test ROM with:
 - Window scale of 10x (640x320 pixels)
 - 2ms delay between cycles
 - ROM file: `test_opcode.ch8`
-
-## Project Structure
-
-```
-chip8-emulator/
-├── core/
-│   └── Chip8.h          # CHIP-8 emulator core header
-├── src/
-│   ├── Chip8.cpp        # CHIP-8 instruction implementations
-│   └── platform.h       # SDL2 platform abstraction layer
-├── main.cpp             # Main entry point and emulation loop
-├── Makefile             # Build configuration
-├── test_opcode.ch8      # Test ROM file
-└── chip8_sdl2          # Compiled executable (after building)
-```
